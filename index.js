@@ -98,3 +98,12 @@ bot.launch().then(() => console.log(`Assistant bot launched...`));
 // Enable graceful stop
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
+
+module.exports.handler = async function (event, context) {
+    const message = JSON.parse(event.body);
+    await bot.handleUpdate(message);
+    return {
+        statusCode: 200,
+        body: "",
+    };
+};
